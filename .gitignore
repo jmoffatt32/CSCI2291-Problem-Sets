@@ -1,7 +1,0 @@
-.venv
-*.aux
-*.fdb_latexmk
-*.fls
-*.log
-*.synctex.gz
-__pycache__
