@@ -20,4 +20,4 @@ data = scaler.fit_transform(data)
 
 lr = skl.LogisticRegression().fit(data, target)
 score = lr.score(data, target)
-pprint(score)
+print(f"{'Classification Accuracy:' :<30}{score}")

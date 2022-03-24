@@ -27,11 +27,12 @@ dtc = DecisionTreeClassifier().fit(data, target)
 lr_score = cross_val_score(lr, data, target, cv=10)
 dtc_score = cross_val_score(dtc, data, target, cv=10)
 
-lr_score_stand = scaler.fit_transform(lr_score.reshape(-1, 1))
-dtc_score_stand = scaler.fit_transform(dtc_score.reshape(-1, 1))
+lr_score_stand = scaler.fit_transform(lr_score.reshape(-1, 1))[:, 0]
+dtc_score_stand = scaler.fit_transform(dtc_score.reshape(-1, 1))[:, 0]
 
-test_stand = ttest_ind(lr_score_stand, dtc_score_stand)
-print(test_stand[1][0])
+test_stand = ttest_ind(lr_score_stand, dtc_score, equal_var=True)
+print(f"{'t-statistic:' :<20}{test_stand[0]}")
+print(f"{'p-value:' :<20}{test_stand[1]}")
 
 # high p-value, very difficult to distinguish if one or the other certainly has a higher corelation
 # essentialy suggesting that the result of the lr_score being higher is due to random chance (the randomly selected data values)
